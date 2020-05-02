@@ -1,21 +1,17 @@
-// code to read and set any environment variables with the dotenv package
 require('dotenv').config()
 // code required to import the keys.js file and store it in a variable
 var keys = require("./keys.js");
 var axios = require("axios");
+var moment = require('moment');
+var fs = require("fs");
+
 // access your keys information 
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
-var moment = require('moment');
-moment().format();
 
 var request = process.argv[2];
-var param = process.argv[3];
 var paramName = "";
 var nodeArgs = process.argv;
-var param = "";
-param = "Ace of Base";
-param = paramName;
 
 // Loop through all the words in the node argument to allow names with multiple words
 for (var i = 3; i < nodeArgs.length; i++) {
@@ -25,15 +21,32 @@ for (var i = 3; i < nodeArgs.length; i++) {
     paramName += nodeArgs[i];
   }
 }
-console.log(paramName);
 
+switch (request) {
+  case "concert-this":
+    bandsInTown(paramName);
+    break;
+
+  case "spotify-this-song":
+    spotifySong(paramName);
+    break;
+
+  case "movie-this":
+    omdbMovie(paramName);
+    break;
+
+  case "do-what-it-says":
+    randomTxt();
+    break;
+}
 // concert-this
-var query = 'https://rest.bandsintown.com/artists/' + paramName + '/events?app_id=codingbootcamp'
-if (request === "concert-this") {
+function bandsInTown(paramName) {
+  if (!paramName) { paramName = "Yanni"; }
+  var query = 'https://rest.bandsintown.com/artists/' + paramName + '/events?app_id=codingbootcamp';
   axios.get(query)
     .then(function (response) {
-      console.log("-------------------------------------------------");
       console.log("Event Title: " + response.data[0].artist.name + response.data[0].title);
+      console.log("-------------------------------------------------");
       console.log("Venue Name: " + response.data[0].venue.name);
       console.log("Venue Location: " + response.data[0].venue.location);
       console.log("Event Date: " + moment(response.data[0].datetime).format('MM DD YYYY'));
@@ -52,23 +65,23 @@ if (request === "concert-this") {
       } else if (error.request) {
         // The request was made but no response was received
         // `error.request` is an object that comes back with details pertaining to the error that occurred.
-        console.log(error.request);
+        console.log("No Results", error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
-        console.log("Error", error.message);
+        console.log("Request Error", error.message);
       }
       console.log(error.config);
     });
 }
 
 // spotify-this-song
-if (request === "spotify-this-song") {
+function spotifySong(paramName) {
   if (!paramName) { paramName = "Ace+of+Base"; }
   spotify
     .search({ type: 'track', query: paramName })
     .then(function (response) {
-      console.log("-------------------------------------------------");
       console.log("Artist(s): " + response.tracks.items[0].artists[0].name);
+      console.log("-------------------------------------------------");
       console.log("Name of Song: " + response.tracks.items[0].name);
       console.log("Preview Link: " + response.tracks.items[0].preview_url);
       console.log("Album: " + response.tracks.items[0].album.name);
@@ -79,10 +92,12 @@ if (request === "spotify-this-song") {
 }
 
 // movie-this
-if (request === "movie-this") {
+function omdbMovie(paramName) {
+  if (!paramName) { paramName = "Mr.+Nobody"; }
   axios.get('http://www.omdbapi.com/?t=' + paramName + '&y=plot=short&apikey=trilogy')
     .then(function (response) {
       console.log("Title: " + response.data.Title);
+      console.log("-------------------------------------------------");
       console.log("Year: " + response.data.Year);
       console.log("IMDB Rating: " + response.data.imdbRating);
       console.log("Rotton Tomatoes Rating: " + response.data.Ratings[1].Value);
@@ -105,38 +120,32 @@ if (request === "movie-this") {
       } else if (error.request) {
         // The request was made but no response was received
         // `error.request` is an object that comes back with details pertaining to the error that occurred.
-        console.log(error.request);
+        console.log("No Results", error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
-        console.log("Error", error.message);
+        console.log("Request Error", error.message);
       }
       console.log(error.config);
     });
 }
 
 // do-what-it-says
-if (request === "do-what-it-says") {
-  var fs = require("fs");
-  fs.readFile("../liri-node-app/random.txt", "utf8", function (err, data) {
-    if (err) {
-      return console.log(err);
-    }
+function randomTxt() {
+  var command = fs.readFileSync("random.txt", "utf8");
+  var dataArr = command.split(','); // Change data in random.txt to array
+  console.log("Random.txt Says: " + dataArr);
+  console.log("-------------------------------------------------");
+  switch (dataArr[0]) {
+    case "concert-this":
+      bandsInTown(dataArr[1]);
+      break;
 
-    var dataArr = data.split(','); // Change data in random.txt to array
-    console.log(dataArr);
-    console.log("-------------------------------------------------");
+    case "spotify-this-song":
+      spotifySong(dataArr[1]);
+      break;
 
-    paramName = "I+Want+It+That+Way"
-    spotify.search({ type: 'track', query: paramName })
-    .then(function (response) {
-      console.log("-------------------------------------------------");
-      console.log("Artist(s): " + response.tracks.items[0].artists[0].name);
-      console.log("Name of Song: " + response.tracks.items[0].name);
-      console.log("Preview Link: " + response.tracks.items[0].preview_url);
-      console.log("Album: " + response.tracks.items[0].album.name);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-  });
+    case "movie-this":
+      omdbMovie(dataArr[1]);
+      break;
+  }
 }
