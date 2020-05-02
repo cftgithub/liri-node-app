@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/cftgithub/liri-node-app#readme",
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "axios": "^0.19.2",
+    "bandsintown-events": "^1.0.4",
+    "dotenv": "^8.2.0",
+    "inquirer": "^7.1.0",
+    "moment": "^2.25.0",
+    "node-spotify-api": "^1.1.1",
+    "xhr2": "^0.2.0"
   }
 }
