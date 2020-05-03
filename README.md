@@ -42,38 +42,59 @@ LIRI will search for parameters given in the command line and return data using 
 
 **Examples**
 
-Screenshot of concert-this with band name:
+*Screenshot of concert-this with band name:*
 ![Image of concert-this](images/concert.JPG)
-Screenshot of concert-this without band name:
+
+*Screenshot of concert-this without band name:*
 ![Image of concert-this with default](images/concertDefault.JPG)
-Screenshot of spotify-this-song with title of song:
+
+*Screenshot of spotify-this-song with title of song:*
 ![Image of concert-this with default](images/spotify.JPG)
-Screenshot of spotify-this-song without title of song:
+
+*Screenshot of spotify-this-song without title of song:*
 ![Image of concert-this with default](images/spotifyDefault.JPG)
-Screenshot of movie-this with title:
+
+*Screenshot of movie-this with title:*
 ![Image of concert-this with default](images/movie.JPG)
-Screenshot of movie-this without title:
+
+*Screenshot of movie-this without title:*
 ![Image of concert-this with default](images/movieDefault.JPG)
-Screenshot of do-what is says:
+
+*Screenshot of do-what is says:*
 ![Image of concert-this with default](images/random1.JPG)
-Screenshot of do-what is says after modifying random.txt:
+
+*Screenshot of do-what is says after modifying random.txt:*
 ![Image of concert-this with default](images/random2.JPG)
 
 **How to run the app:**
 
-**Link to a deployed version of the app:**
+1. Clone a copy to your local drive.
+1. Make sure you have all the npm packages installed; enter the following in your terminal to update package.json:
 
+    npm install
+1. Sign up for Spotify API keys; create a file named .env and add your Spotify keys in that file. (You need to supply your own Spotify API key)
 
-**List technologies used in the app:**
+    Example:
 
+        Spotify API keys
 
-**Role in app development:**
-    
+        SPOTIFY_ID=your-spotify-id
+        SPOTIFY_SECRET=your-spotify-secret
+1. In your terminal, type in the commands in the Parameters or Example sections above to test it out.
+1. Have fun!!!
+
+**Link to Github:**
+
+[LIRI-Bot](https://github.com/cftgithub/liri-node-app)
+  
 **Technologies Used**
 
-* Bands in Town API
-* OMDB API
-* Node-Spotify-API
+* Javascript
+* Node.js
 * Axios NPM
 * Moment NPM
 * DotEnv NPM
+* fs/File-System
+* Bands in Town API
+* OMDB API
+* Node-Spotify-API
