@@ -6,26 +6,26 @@ LIRI is a Language Interpretation and Recognition Interface. This is a command l
 
 **MVP**
 
-LIRI will search for parameters given in the command line and return data using the following:
+LIRI will search for parameters given in the command line and return data using the following APIs:
 
 * Spotify for songs
 * Bands in Town for concerts
 * OMDB for movies
 
 **Parameters**
-* node liri.js concert-this <artist/band name> will return:
+* node liri.js concert-this <artist/band name> returns:
     - Name of the venue
     - Venu location
     - Date of the event (formated using moment as MM/DD/YYYY)
 
-* node liris.js spotify-this-song '<song name>' will return:
+* node liris.js spotify-this-song '<song name>' returns:
     - Artist(s)
     - Song's name
     - Preview link of the song from Spotify
     - Album of the song
-    - If no song is provided, program will default to "The Sign" by Ace of Base
+    - If song name is not specified, program will default to "The Sign" by Ace of Base
 
-* node liri.js movie-this '<movie name>' will return:
+* node liri.js movie-this '<movie name>' returns:
     - Title of the movie
     - Year the movie came out
     - IMDB Rating
@@ -34,17 +34,32 @@ LIRI will search for parameters given in the command line and return data using 
     - Language of the movie
     - Plot of the movie
     - Actors in the movie
-    - If movie is not typed in, the program will output data for the movie 'Mr. Nobody'
+    - If movie is not specified, the program will output data for the movie 'Mr. Nobody'
 
 * node liri.js do-what-it-says:
     - LIRI will take the text inside of random.txt using fs Node package to call one of LIRI's commands
-    - Runs spotify-this-song for "I Want it That Way" as folow in the text in random.txt
+    - Default text in random.txt is: "spotify-this-song, "I Want it That Way"
+
+**Examples**
+
+Screenshot of concert-this with band name:
+![Image of concert-this](images/concert.JPG)
+Screenshot of concert-this without band name:
+![Image of concert-this with default](images/concertDefault.JPG)
+Screenshot of spotify-this-song with title of song:
+![Image of concert-this with default](images/spotify.JPG)
+Screenshot of spotify-this-song without title of song:
+![Image of concert-this with default](images/spotifyDefault.JPG)
+Screenshot of movie-this with title:
+![Image of concert-this with default](images/movie.JPG)
+Screenshot of movie-this without title:
+![Image of concert-this with default](images/movieDefault.JPG)
+Screenshot of do-what is says:
+![Image of concert-this with default](images/random1.JPG)
+Screenshot of do-what is says after modifying random.txt:
+![Image of concert-this with default](images/random2.JPG)
 
 **How to run the app:**
-
-
-**Screenshots, gifs or videos of the app functioning:**
-
 
 **Link to a deployed version of the app:**
 

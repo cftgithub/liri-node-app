@@ -100,7 +100,7 @@ function omdbMovie(paramName) {
       console.log("-------------------------------------------------");
       console.log("Year: " + response.data.Year);
       console.log("IMDB Rating: " + response.data.imdbRating);
-      console.log("Rotton Tomatoes Rating: " + response.data.Ratings[1].Value);
+      console.log("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
       console.log("Country where movie was produced: " + response.data.Country);
       console.log("Language: " + response.data.Language);
       console.log("Plot: " + response.data.Plot);
@@ -133,7 +133,7 @@ function omdbMovie(paramName) {
 function randomTxt() {
   var command = fs.readFileSync("random.txt", "utf8");
   var dataArr = command.split(','); // Change data in random.txt to array
-  console.log("Random.txt Says: " + dataArr);
+  console.log("Random txt says to: " + dataArr);
   console.log("-------------------------------------------------");
   switch (dataArr[0]) {
     case "concert-this":
