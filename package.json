@@ -22,7 +22,7 @@
     "bandsintown-events": "^1.0.4",
     "dotenv": "^8.2.0",
     "inquirer": "^7.1.0",
-    "moment": "^2.25.0",
+    "moment": "^2.29.2",
     "node-spotify-api": "^1.1.1",
     "xhr2": "^0.2.0"
   }
